@@ -1,0 +1,50 @@
+from flask import Flask
+from data import db_session
+from data.users import User
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+def main():
+    db_session.global_init("db/mars_explorer.db")
+    session = db_session.create_session()
+
+    user = User()
+    user.surname = "Scott"
+    user.name = "Ridley"
+    user.age = 21
+    user.position = "captain"
+    user.speciality = "research engineer"
+    user.address = "module_1"
+    user.email = "scott_chief@mars.org"
+    user.hashed_password = "cap"
+    user.set_password(user.hashed_password)
+    session.add(user)
+
+    user = User()
+    user.surname = "Ivanov"
+    user.name = "Vasya"
+    user.age = 18
+    user.position = "attack"
+    user.speciality = "hockey player"
+    user.address = "module_5"
+    user.email = "vasya_attack@mars.org"
+    user.hashed_password = "ogoo"
+    user.set_password(user.hashed_password)
+    session.add(user)
+
+    user = User()
+    user.surname = "Efimov"
+    user.name = "Bagration"
+    user.age = 29
+    user.position = "seeker"
+    user.speciality = "archaeologist"
+    user.address = "module_156"
+    user.email = "baga@mars.org"
+    user.hashed_password = "arx"
+    user.set_password(user.hashed_password)
+    session.add(user)
+
+
+if __name__ == '__main__':
+    main()
